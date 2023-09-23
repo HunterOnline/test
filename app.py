@@ -1,3 +1,4 @@
+from loader import db_user
 from utils.set_bot_commands import set_default_commands
 
 
@@ -6,6 +7,13 @@ async def on_startup(dp):
     import middlewares
     filters.setup(dp)
     middlewares.setup(dp)
+    try:
+        db_user.create_user_table()
+
+    except Exception as e:
+        print(e)
+
+    db_user.unload_user_data()
 
     from utils.notify_admins import on_startup_notify
     await on_startup_notify(dp)
