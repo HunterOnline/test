@@ -259,7 +259,10 @@ async def ketamine(call: types.CallbackQuery, ):
 @dp.message_handler(state='enter_ketamine')
 async def ketamine_calculate(message: types.Message, state: FSMContext):
     try:
+
         float_persent = float(message.text.strip())
+        if float_persent<=0:
+            raise ZeroDivisionError()
         mg_ml = float_persent * 1000 / 100
         enter_ml = {'vv_or_vk': f'{20 / mg_ml:.2f}-{30 / mg_ml:.2f} ml',
                     'vm_or_itro_nazal': f'{50 / mg_ml:.2f}-{100 / mg_ml:.2f} ml'}
@@ -283,6 +286,12 @@ async def ketamine_calculate(message: types.Message, state: FSMContext):
         await state.update_data(percent=message.text, mention=message.from_user.get_mention())
         await message.answer(
             f'<b>⛔Некоректне значення!\nСпробуй ще, введіть <u>%-вість</u> КЕТАМІНУ\n(має бути ціле або число через <u>крапку</u>❗</b>)',
+            reply_markup=fix_keyboard)
+    except ZeroDivisionError:
+        print(f'🤦‍️{message.from_user.full_name} тупарь!')
+        await state.update_data(percent=message.text, mention=message.from_user.get_mention())
+        await message.answer(
+            f'<b>🤦‍♂️Зберись, подумай що не так!\nСпробуй ще, введи <u>%-вість</u> КЕТАМІНУ\n(має бути ціле або число через <u>крапку</u>❗</b>)',
             reply_markup=fix_keyboard)
 
 
@@ -313,6 +322,8 @@ async def drug_txa(call: types.CallbackQuery, ):
 async def TXA_calculate(message: types.Message, state: FSMContext):
     try:
         float_persent = float(message.text.strip())
+        if float_persent <= 0:
+            raise ZeroDivisionError('🤦‍♂️тупарь!')
         mg_ml = float_persent * 1000 / 100
         enter_ml = {'vv_or_vk': f'{2000 / mg_ml:.2f} ml'
                     }
@@ -334,6 +345,12 @@ async def TXA_calculate(message: types.Message, state: FSMContext):
         await state.update_data(percent=message.text, mention=message.from_user.get_mention())
         await message.answer(
             f'<b>⛔Некоректне значення!\nСпробуй ще, введіть <u>%-вість</u> TXA\n(має бути ціле або число через <u>крапку</u>❗</b>)',
+            reply_markup=fix_keyboard)
+    except ZeroDivisionError:
+        print(f'🤦‍️{message.from_user.full_name} тупарь!')
+        await state.update_data(percent=message.text, mention=message.from_user.get_mention())
+        await message.answer(
+            f'<b>🤦‍♂️Зберись, подумай що не так!\nСпробуй ще, введи <u>%-вість</u> TXA\n(має бути ціле або число через <u>крапку</u>❗</b>)',
             reply_markup=fix_keyboard)
 
 
@@ -366,6 +383,8 @@ async def nalokson(call: types.CallbackQuery, ):
 async def nalokson_calculate(message: types.Message, state: FSMContext):
     try:
         float_persent = float(message.text.strip())
+        if float_persent <= 0:
+            raise ZeroDivisionError('🤦‍♂️тупарь!')
         mg_ml = float_persent * 1000 / 100
         enter_ml = {'vv_or_vk': f'{0.4 / mg_ml:.2f} ml'
                     }
@@ -390,6 +409,12 @@ async def nalokson_calculate(message: types.Message, state: FSMContext):
         await state.update_data(percent=message.text, mention=message.from_user.get_mention())
         await message.answer(
             f'<b>⛔Некоректне значення!\nСпробуй ще, введіть <u>%-вість</u> НАЛОКСОНУ\n(має бути ціле або число через <u>крапку</u>❗</b>)',
+            reply_markup=fix_keyboard)
+    except ZeroDivisionError:
+        print(f'🤦‍️{message.from_user.full_name} тупарь!')
+        await state.update_data(percent=message.text, mention=message.from_user.get_mention())
+        await message.answer(
+            f'<b>🤦‍♂️Зберись, подумай що не так!\nСпробуй ще, введи <u>%-вість</u> НАЛОКСОНУ\n(має бути ціле або число через <u>крапку</u>❗</b>)',
             reply_markup=fix_keyboard)
 
 
@@ -423,6 +448,8 @@ async def ondasetron(call: types.CallbackQuery, ):
 async def ondasetron_calculate(message: types.Message, state: FSMContext):
     try:
         float_persent = float(message.text.strip())
+        if float_persent <= 0:
+            raise ZeroDivisionError('🤦‍♂️тупарь!')
         mg_ml = float_persent * 1000 / 100
         enter_ml = {'vv_or_vk': f'{2 / mg_ml:.2f} ml'
                     }
@@ -447,7 +474,12 @@ async def ondasetron_calculate(message: types.Message, state: FSMContext):
         await message.answer(
             f'<b>⛔Некоректне значення!\nСпробуй ще, введіть <u>%-вість</u> ОНДАСЕТРОНУ\n(має бути ціле або число через <u>крапку</u>❗</b>)',
             reply_markup=fix_keyboard)
-
+    except ZeroDivisionError:
+        print(f'🤦‍️{message.from_user.full_name} тупарь!')
+        await state.update_data(percent=message.text, mention=message.from_user.get_mention())
+        await message.answer(
+           f'<b>🤦‍♂️Зберись, подумай що не так!\nСпробуй ще, введи <u>%-вість</u> ОНДАСЕТРОНУ\n(має бути ціле або число через <u>крапку</u>❗</b>)',
+          reply_markup=fix_keyboard)
 
 """Са ХЛОРИД"""
 
@@ -477,6 +509,8 @@ async def ca_cl(call: types.CallbackQuery, ):
 async def cacl_calculate(message: types.Message, state: FSMContext):
     try:
         float_persent = float(message.text.strip())
+        if float_persent <= 0:
+            raise ZeroDivisionError('🤦‍♂️тупарь!')
         mg_ml = float_persent * 1000 / 100
         enter_ml = {'vv_or_vk': f'{1000 / mg_ml:.2f} ml'
                     }
@@ -500,6 +534,12 @@ async def cacl_calculate(message: types.Message, state: FSMContext):
         await message.answer(
             f'<b>⛔Некоректне значення!\nСпробуй ще, введіть <u>%-вість</u> Са\u00B2⁺ХЛОРИДУ\n(має бути ціле або число через <u>крапку</u>❗</b>)',
             reply_markup=fix_keyboard)
+    except ZeroDivisionError:
+        print(f'🤦‍️{message.from_user.full_name} тупарь!')
+        await state.update_data(percent=message.text, mention=message.from_user.get_mention())
+        await message.answer(
+          f'<b>🤦‍♂️Зберись, подумай що не так!\nСпробуй ще, введи <u>%-вість</u> Са\u00B2⁺ХЛОРИДУ\n(має бути ціле або число через <u>крапку</u>❗</b>)',
+          reply_markup=fix_keyboard)
 
 
 """Са Глюконат"""
