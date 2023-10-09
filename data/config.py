@@ -20,6 +20,6 @@ redis = {
     'encoding': 'utf8'
 }
 
-POSTGRES_URI = f"postgresql://postgres:N9a4sY59da1ibQGAKTfV@containers-us-west-200.railway.app:7428/railway"
+POSTGRES_URI = f"postgres://admin_pg_db:uPCwgiaT1kQCRHyJEqnTZ0sYPe4OvbJ4@dpg-ckh9q8a12bvs73c21760-a.oregon-postgres.render.com/db_postgres_x9lr"
 
 #POSTGRES_URI = f"postgresql://{PG_USER}:{PG_PASS}@{db_host}/{DATABASE}"
