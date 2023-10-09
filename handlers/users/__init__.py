@@ -1,6 +1,6 @@
 from . to_count import dp
-from . download_db import dp
-from .fix_user_table import dp
+
+from . fix_user_table import dp
 from .help import dp
 from .start import dp
 from .echo import dp

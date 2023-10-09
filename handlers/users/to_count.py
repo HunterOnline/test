@@ -8,9 +8,9 @@ from keyboards.default.main_button import main_button
 from keyboards.inline.drugs_buttons import drugs_list_keyboard, drugs_callback, manipulations_keyboard, \
     back_drug_keyboard
 from keyboards.inline.fix_buttons import fix_keyboard, fix_callback
-from loader import dp, db_user, bot
+from loader import dp, bot
 from states.fix_state import FixMessage, CalcMessage
-
+from utils.db_api import quick_commands
 from utils.misc import rate_limit
 from utils.misc.reset_fsm_state import set_reset_timer
 import prettytable as pt
@@ -23,18 +23,16 @@ import prettytable as pt
 @rate_limit(5, "Розрахунки при опіках 🔥")
 @dp.message_handler(text="Розрахунки при опіках 🔥")
 async def calculate_burns(message: types.Message, state: FSMContext):
-    name = message.from_user.get_mention()
-    user_id = message.from_user.id
-    users = db_user.buf_user_data
-    if user_id in users:
-        logging.info(f"{message.from_user.full_name} -> уже есть БД_S")
-    else:
-        try:
-            db_user.add_user(user_id, name)
-            db_user.unload_user_data()
+    try:
+            user_id = message.from_user.id
+            name = message.from_user.get_mention()
+            await quick_commands.add_user(user_id, name)
+
             logging.info(f"{message.from_user.full_name} -> записани в БД")
-        except Exception as e:
+
+    except Exception as e:
             print(e)
+
 
     await message.answer("<b>🚩Введіть <u>ВАГУ</u> в кілограмах\n(має бути одне число❗)</b>", reply_markup=main_button)
     await FixMessage.EnterWeight.set()
@@ -100,19 +98,16 @@ async def cancel_state(call: types.CallbackQuery, state: FSMContext):
 @rate_limit(5, "Шпаргалка 📋")
 @dp.message_handler(text="Шпаргалка 📋")
 async def calculate_burns(message: types.Message):
-    name = message.from_user.get_mention()
-    user_id = message.from_user.id
-    users = db_user.buf_user_data
-    if user_id in users:
-        logging.info(f"{message.from_user.full_name} -> уже есть БД_S")
-    else:
-        try:
-            db_user.add_user(user_id, name)
-            db_user.unload_user_data()
+    try:
+            user_id = message.from_user.id
+            name = message.from_user.get_mention()
+            await quick_commands.add_user(user_id, name)
+
             logging.info(f"{message.from_user.full_name} -> записани в БД")
 
-        except Exception as e:
+    except Exception as e:
             print(e)
+
 
     await message.answer_document(open("data/препарати.pdf", "rb"), reply_markup=main_button)
 
@@ -122,19 +117,16 @@ async def calculate_burns(message: types.Message):
 @rate_limit(5, "Розрахунки препаратів 💉")
 @dp.message_handler(text="Розрахунки препаратів 💉")
 async def drugs_menu(message: types.Message):
-    name = message.from_user.get_mention()
-    user_id = message.from_user.id
-    users = db_user.buf_user_data
-    if user_id in users:
-        logging.info(f"{message.from_user.full_name} -> уже есть БД_S")
-    else:
-        try:
-            db_user.add_user(user_id, name)
-            db_user.unload_user_data()
-            logging.info(f"{message.from_user.full_name} -> записани в БД")
+    try:
+        user_id = message.from_user.id
+        name = message.from_user.get_mention()
+        await quick_commands.add_user(user_id, name)
 
-        except Exception as e:
-            print(e)
+        logging.info(f"{message.from_user.full_name} -> записани в БД")
+
+    except Exception as e:
+        print(e)
+
     logging.info(message.from_user.full_name + " -> pressed [Розрахунки препаратів 💉]")
     await message.answer(text="<b>Виберіть препарат: 💊</b>", reply_markup=drugs_list_keyboard)
 
