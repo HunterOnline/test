@@ -1,6 +1,6 @@
 gino
 asyncpg
-aiogram<3.0
+aiogram
 aiohttp==3.6.2
 aioredis<2.0
 python-dotenv
