@@ -1,7 +1,7 @@
 gino
 asyncpg
 aiogram
-aiohttp==3.6.2
-aioredis<2.0
+aiohttp
+aioredis
 python-dotenv
 prettytable
