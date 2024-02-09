@@ -8,16 +8,11 @@ from aiohttp import web
 
 from data import config
 from data.config import WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT, ip
-from loader import SSL_CERTIFICATE, ssl_context, bot
+from loader import SSL_CERTIFICATE, ssl_context, db, bot
 from utils.set_bot_commands import set_default_commands
 from webserver.handler import app, dp
 from utils.db_api import db_gino
-
-
-
    
-   
-
 
 async def on_startup(app):
     await bot.set_webhook(
