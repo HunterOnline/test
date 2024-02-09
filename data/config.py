@@ -20,6 +20,18 @@ redis = {
     'encoding': 'utf8'
 }
 
-POSTGRES_URI = f"postgres://med_bot_users_o7ga_user:pGYXHHAvXCslZLfG4K26pWUOLmWKNT4V@dpg-cmtukhen7f5s73b262rg-a.frankfurt-postgres.render.com/med_bot_users_o7ga"
+POSTGRES_URI = 
 
 #POSTGRES_URI = f"postgresql://{PG_USER}:{PG_PASS}@{db_host}/{DATABASE}"
+# webhook settings
+WEBHOOK_HOST = f"https://{ip}"
+WEBHOOK_PORT = 8443
+WEBHOOK_PATH = f"/bot/{BOT_TOKEN}"
+WEBHOOK_URL = f"{WEBHOOK_HOST}:{WEBHOOK_PORT}{WEBHOOK_PATH}"
+
+# webserver settings
+WEBAPP_HOST = '0.0.0.0'  # or ip
+WEBAPP_PORT = os.getenv("WEBAPP_PORT")
+
+WEBHOOK_SSL_CERT = "webhook_cert.pem"
+WEBHOOK_SSL_PRIV = "webhook_pkey.pem"
