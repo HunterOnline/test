@@ -11,6 +11,12 @@ from data.config import WEBHOOK_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT, ip
 from loader import SSL_CERTIFICATE, ssl_context, bot
 from utils.set_bot_commands import set_default_commands
 from webserver.handler import app, dp
+from utils.db_api import db_gino
+
+
+
+   
+   
 
 
 async def on_startup(app):
@@ -26,6 +32,17 @@ async def on_startup(app):
 
     filters.setup(dp)
     middlewares.setup(dp)
+    
+    from utils.notify_admins import on_startup_notify
+    print("Подключаем БД")
+    await db_gino.on_startup(dp)
+    print("Готово")
+
+    print("Создаем таблицы")
+    await db.gino.create_all()
+
+    print("Готово")
+    
 
     from utils.notify_admins import on_startup_notify
     await on_startup_notify(dp)
