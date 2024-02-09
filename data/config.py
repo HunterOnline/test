@@ -9,6 +9,7 @@ ADMINS = 401041664
 PG_USER = str(os.getenv("PG_USER"))
 PG_PASS= str(os.getenv("PG_PASS"))
 DATABASE = str(os.getenv("DATABASE"))
+POSTGRES_URI = str(os.getenv("PG_URI"))
 ip = os.getenv("ip")
 db_host = ip
 aiogram_redis = {
@@ -20,7 +21,7 @@ redis = {
     'encoding': 'utf8'
 }
 
-POSTGRES_URI = 
+
 
 #POSTGRES_URI = f"postgresql://{PG_USER}:{PG_PASS}@{db_host}/{DATABASE}"
 # webhook settings
