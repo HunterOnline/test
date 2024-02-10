@@ -23,21 +23,21 @@ import prettytable as pt
 @rate_limit(5, "Розрахунки при опіках 🔥")
 @dp.message_handler(text="Розрахунки при опіках 🔥")
 async def calculate_burns(message: types.Message, state: FSMContext):
-    # try:
-    #         user_id = message.from_user.id
-    #         name = message.from_user.get_mention()
-    #         await quick_commands.add_user(user_id, name)
+    try:
+            user_id = message.from_user.id
+            name = message.from_user.get_mention()
+            await quick_commands.add_user(user_id, name)
 
-    #         logging.info(f"{message.from_user.full_name} -> записани в БД")
+            logging.info(f"{message.from_user.full_name} -> записани в БД")
 
-    # except Exception as e:
-    #         print(e)
+    except Exception as e:
+            print(e)
 
 
     await message.answer("<b>🚩Введіть <u>ВАГУ</u> в кілограмах\n(має бути одне число❗)</b>", reply_markup=main_button)
     await FixMessage.EnterWeight.set()
     logging.info(message.from_user.full_name + " -> pressed [Розрахунки при опіках 🔥]")
-    await set_reset_timer(user_id=message.from_user.id, state=state, timeout_seconds=90)
+    # await set_reset_timer(user_id=message.from_user.id, state=state, timeout_seconds=90)
 
 
 @dp.message_handler(state=FixMessage.EnterWeight)
@@ -98,15 +98,15 @@ async def cancel_state(call: types.CallbackQuery, state: FSMContext):
 @rate_limit(5, "Шпаргалка 📋")
 @dp.message_handler(text="Шпаргалка 📋")
 async def calculate_burns(message: types.Message):
-    # try:
-    #         user_id = message.from_user.id
-    #         name = message.from_user.get_mention()
-    #         await quick_commands.add_user(user_id, name)
+    try:
+            user_id = message.from_user.id
+            name = message.from_user.get_mention()
+            await quick_commands.add_user(user_id, name)
 
-    #         logging.info(f"{message.from_user.full_name} -> записани в БД")
+            logging.info(f"{message.from_user.full_name} -> записани в БД")
 
-    # except Exception as e:
-    #         print(e)
+    except Exception as e:
+            print(e)
 
 
     await message.answer_document(open("data/препарати.pdf", "rb"), reply_markup=main_button)
